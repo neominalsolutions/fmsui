@@ -1,14 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.bi.fmsui.FreightController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="443.0" prefWidth="433.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bi.fmsui.FreightController">
+   <children>
+      <Label layoutX="10.0" layoutY="38.0" prefHeight="34.0" prefWidth="106.0" text="Yük Tipi :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="rbLight" layoutX="141.0" layoutY="42.0" mnemonicParsing="false" onAction="#onRadioButtonChange" text="Hafif">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="WeightType" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbHeavy" layoutX="230.0" layoutY="42.0" mnemonicParsing="false" onAction="#onRadioButtonChange" text="Ağır" toggleGroup="$WeightType">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </RadioButton>
+      <Label layoutX="8.0" layoutY="83.0" prefHeight="34.0" prefWidth="132.0" text="Kargo Tipi:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmbFreightType" layoutX="138.0" layoutY="81.0" prefHeight="42.0" prefWidth="286.0" />
+      <Label layoutX="4.0" layoutY="135.0" prefHeight="34.0" prefWidth="132.0" text="Gönderim Tarihi:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dtShippedDate" layoutX="142.0" layoutY="131.0" prefHeight="42.0" prefWidth="280.0" />
+      <Label layoutX="4.0" layoutY="183.0" prefHeight="34.0" prefWidth="132.0" text="Ağırlığı (kg)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtWeight" layoutX="142.0" layoutY="180.0" prefHeight="34.0" prefWidth="280.0" />
+      <Label layoutX="8.0" layoutY="218.0" prefHeight="34.0" prefWidth="132.0" text="En (cm)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtWidth" layoutX="142.0" layoutY="217.0" prefHeight="34.0" prefWidth="280.0" />
+      <Label layoutX="8.0" layoutY="259.0" prefHeight="34.0" prefWidth="132.0" text="Boy (cm)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtHeight" layoutX="142.0" layoutY="258.0" prefHeight="34.0" prefWidth="280.0" />
+      <Label layoutX="8.0" layoutY="293.0" prefHeight="34.0" prefWidth="132.0" text="Yükseklik (cm)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtLength" layoutX="142.0" layoutY="300.0" prefHeight="34.0" prefWidth="280.0" />
+      <Label layoutX="8.0" layoutY="342.0" prefHeight="34.0" prefWidth="132.0" text="Birim Fiyat:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUnitPrice" layoutX="142.0" layoutY="342.0" prefHeight="34.0" prefWidth="280.0" />
+      <Button layoutX="144.0" layoutY="388.0" mnemonicParsing="false" onAction="#onCalculate" prefHeight="50.0" prefWidth="280.0" text="Hesapla">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>

@@ -2,14 +2,16 @@ package com.bi.fmsui;
 
 
 import com.freight.dtos.FreightRequestDto;
+import com.freight.models.StandardFreight;
 import com.freight.services.FreightService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 import java.time.LocalDate;
 
 // Best practise.
 
-public class FreightController {
+public class Freight2Controller {
     @FXML
     private TextField txtWeight;
     @FXML
@@ -73,31 +75,48 @@ public class FreightController {
 
    @FXML
     protected void onCalculate(){
-        // Buttona tıklandığında servis çağır
+       // Eğer Servis olmasaydı nasıl yazacaktık.
 
-       // Text içinden gelen değerleri Parsa ettik.
-       // Wrapper Types
-       double weight = Double.parseDouble(txtWeight.getText());
-       double width = Double.parseDouble(txtWidth.getText());
-       double height = Double.parseDouble(txtHeight.getText());
-       double length = Double.parseDouble(txtLength.getText());
-       double unitPrice = Double.parseDouble(txtUnitPrice.getText());
-       String freightType = cmbFreightType.getValue();
-       LocalDate shippedDate = dtShippedDate.getValue();
-       boolean lightFreight = rbLight.isSelected();
+       if(cmbFreightType.getSelectionModel().getSelectedItem().equals("Standard")){
+           if(rbLight.isSelected()){
 
-       var request = new FreightRequestDto(lightFreight,weight,height,length,width,unitPrice,shippedDate,freightType);
+               double weight = Double.parseDouble(txtWeight.getText());
+               StandardFreight sf = new StandardFreight(weight);
+
+               double unitPrice = Double.parseDouble(txtUnitPrice.getText());
+
+               double listPrice = sf.calculatePrice(unitPrice);
+
+               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+               alert.setTitle("Standard Freight");
+               alert.setHeaderText("");
+               alert.setContentText("Fiyat " +  listPrice);
+               alert.showAndWait();
+
+           } else {
 
 
-       FreightService freightService = new FreightService();
-       var response = freightService.handle(request);
+               double width = Double.parseDouble(txtWidth.getText());
+               double height = Double.parseDouble(txtHeight.getText());
+               double length = Double.parseDouble(txtLength.getText());
+
+               StandardFreight sf = new StandardFreight(height,width,length);
+
+               double unitPrice = Double.parseDouble(txtUnitPrice.getText());
+
+               double listPrice = sf.calculatePrice(unitPrice);
 
 
-       // Gelen değeri mesaj kutusunda gösterdik
-       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-       alert.setTitle("Kargo Ücreti Hesaplama");
-       alert.setHeaderText("Freight Service Price " + response.getListPrice());
-       alert.showAndWait(); // mesaj olarak göster
+               Alert alert = new Alert(Alert.AlertType.INFORMATION);
+               alert.setTitle("Standard Freight");
+               alert.setHeaderText("");
+               alert.setContentText("Fiyat " +  listPrice);
+               alert.showAndWait();
+
+           }
+
+       }
+
 
 
 
